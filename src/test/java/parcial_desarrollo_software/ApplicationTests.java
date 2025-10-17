@@ -16,6 +16,7 @@ class ApplicationTests {
 	}
 
 	// Pruebas unitarias para el servicio de nómina
+
 	@Test
 	void testCalculoCorrecto() {
 		int total = nominaService.calcularNomina(20000, 40);
@@ -43,7 +44,22 @@ class ApplicationTests {
 		assertTrue(e.getMessage().contains("76 horas"));
 	}
 
+	@Test
+	void testHorasNull() {
+		Exception e = assertThrows(IllegalArgumentException.class, () ->
+				nominaService.calcularNomina(Integer.valueOf(20000), null));
+		assertTrue(e.getMessage().toLowerCase().contains("obligatorias"));
+	}
+
+	@Test
+	void testValorHoraNull() {
+		Exception e = assertThrows(IllegalArgumentException.class, () ->
+				nominaService.calcularNomina(null, Integer.valueOf(10)));
+		assertTrue(e.getMessage().toLowerCase().contains("obligatorio"));
+	}
+
 	// Pruebas de frontera (borde)
+
 	@Test
 	void testBordeInferiorValorHora() {
 		int total = nominaService.calcularNomina(10000, 10);
@@ -61,4 +77,11 @@ class ApplicationTests {
 		int total = nominaService.calcularNomina(20000, 76);
 		assertEquals(1520000, total);
 	}
+
+	@Test
+	void testBordeHorasMinimas() {
+		int total = nominaService.calcularNomina(20000, 1);
+		assertEquals(20000, total);
+	}
+
 }
