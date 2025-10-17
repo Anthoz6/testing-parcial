@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NominaService {
 
-    public double calcularNomina(double valorHora, int horas) {
+    public int calcularNomina(int valorHora, int horas) {
         if (valorHora < 10000 || valorHora > 80000) {
             throw new IllegalArgumentException("El valor por hora debe estar entre 10,000 y 80,000 pesos.");
         }
