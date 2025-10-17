@@ -1,36 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cálculo de Nómina</title>
-  <style>
-    body { font-family: Arial; background: #f8f9fa; padding: 30px; }
-    form { background: white; padding: 20px; border-radius: 10px; width: 400px; margin: auto; box-shadow: 0 0 10px #ccc; }
-    label { display: block; margin-top: 10px; }
-    input { width: 100%; padding: 8px; margin-top: 5px; }
-    button { margin-top: 20px; width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; }
-    .error { color: red; text-align: center; margin-bottom: 15px; }
-  </style>
+  <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
-<h2 style="text-align:center;">Cálculo de Nómina Docente</h2>
+<div class="container">
+  <h2>Cálculo de Nómina</h2>
+  <p class="subtitle">Ingrese los datos del docente</p>
 
-<div th:if="${error}" class="error" th:text="${error}"></div>
+  <div th:if="${error}" class="error" th:text="${error}"></div>
 
-<form th:action="@{/calcular}" th:object="${docente}" method="post">
-  <label>Nombre:</label>
-  <input type="text" th:field="*{nombre}" required>
+  <form th:action="@{/calcular}" th:object="${docente}" method="post">
 
-  <label>Identificación:</label>
-  <input type="text" th:field="*{identificacion}" required>
+    <div class="form-group">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" th:field="*{nombre}"
+             pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$"
+             title="Solo letras y espacios, no puede comenzar con un espacio"
+             required placeholder="Ej: Juan Pérez">
+      <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></div>
+    </div>
 
-  <label>Valor hora (10.000 - 80.000):</label>
-  <input type="number" th:field="*{valorHora}" required>
+    <div class="form-group">
+      <label for="identificacion">Identificación</label>
+      <input type="text" id="identificacion" th:field="*{identificacion}"
+             pattern="^\d{5,10}$"
+             title="Solo números (5 a 10 dígitos)"
+             required placeholder="Ej: 1234567890">
+      <div th:if="${#fields.hasErrors('identificacion')}" th:errors="*{identificacion}" class="error"></div>
+    </div>
 
-  <label>Número de horas (máx. 76):</label>
-  <input type="number" th:field="*{horasTrabajadas}" required>
+    <div class="form-group">
+      <label for="valorHora">Valor por hora</label>
+      <input type="number" id="valorHora" th:field="*{valorHora}"
+             required min="10000" max="80000" placeholder="Ej: 50000">
+      <span class="input-hint">Rango permitido: $10.000 - $80.000</span>
+      <div th:if="${#fields.hasErrors('valorHora')}" th:errors="*{valorHora}" class="error"></div>
+    </div>
 
-  <button type="submit">Calcular Nómina</button>
-</form>
+    <div class="form-group">
+      <label for="horasTrabajadas">Horas trabajadas</label>
+      <input type="number" id="horasTrabajadas" th:field="*{horasTrabajadas}"
+             required min="1" max="76" placeholder="Ej: 40">
+      <span class="input-hint">Máximo: 76 horas</span>
+      <div th:if="${#fields.hasErrors('horasTrabajadas')}" th:errors="*{horasTrabajadas}" class="error"></div>
+    </div>
+
+    <button type="submit">Calcular Nómina</button>
+  </form>
+</div>
 </body>
 </html>

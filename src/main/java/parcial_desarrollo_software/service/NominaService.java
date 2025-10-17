@@ -5,7 +5,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class NominaService {
 
-    public int calcularNomina(int valorHora, int horas) {
+    public int calcularNomina(Integer valorHora, Integer horas) {
+        if (valorHora == null) {
+            throw new IllegalArgumentException("El valor por hora es obligatorio.");
+        }
+        if (horas == null) {
+            throw new IllegalArgumentException("Las horas trabajadas son obligatorias.");
+        }
         if (valorHora < 10000 || valorHora > 80000) {
             throw new IllegalArgumentException("El valor por hora debe estar entre 10,000 y 80,000 pesos.");
         }

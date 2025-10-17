@@ -1,23 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado Nómina</title>
-    <style>
-        body { font-family: Arial; background: #f8f9fa; padding: 30px; }
-        .card { background: white; width: 400px; margin: auto; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px #ccc; text-align:center; }
-        a { text-decoration: none; color: white; background-color: #007bff; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 20px; }
-    </style>
+    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
-<div class="card">
+<div class="container">
     <h2>Resultado de la Nómina</h2>
-    <p><b>Nombre:</b> <span th:text="${docente.nombre}"></span></p>
-    <p><b>Identificación:</b> <span th:text="${docente.identificacion}"></span></p>
-    <p><b>Horas Trabajadas:</b> <span th:text="${docente.horasTrabajadas}"></span></p>
-    <p><b>Valor Hora:</b> $<span th:text="${docente.valorHora}"></span></p>
-    <h3>Total Nómina: $<span th:text="${docente.totalNomina}"></span></h3>
-    <a th:href="@{/}">Volver</a>
+    <p class="subtitle">Cálculo completado exitosamente</p>
+
+    <div class="result-item">
+        <span class="result-label">Nombre</span>
+        <span class="result-value" th:text="${docente.nombre}"></span>
+    </div>
+
+    <div class="result-item">
+        <span class="result-label">Identificación</span>
+        <span class="result-value" th:text="${docente.identificacion}"></span>
+    </div>
+
+    <div class="result-item">
+        <span class="result-label">Horas Trabajadas</span>
+        <span class="result-value" th:text="${docente.horasTrabajadas}"></span>
+    </div>
+
+    <div class="result-item">
+        <span class="result-label">Valor por Hora</span>
+        <span class="result-value">$<span th:text="${docente.valorHora}"></span></span>
+    </div>
+
+    <div class="total-box">
+        <h3>Total Nómina</h3>
+        <div class="total-amount">$<span th:text="${docente.totalNomina}"></span></div>
+    </div>
+
+    <a th:href="@{/}" class="btn">Volver al formulario</a>
 </div>
 </body>
 </html>
