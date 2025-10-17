@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cálculo de Nómina</title>
+  <style>
+    body { font-family: Arial; background: #f8f9fa; padding: 30px; }
+    form { background: white; padding: 20px; border-radius: 10px; width: 400px; margin: auto; box-shadow: 0 0 10px #ccc; }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+    .error { color: red; text-align: center; margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+<h2 style="text-align:center;">Cálculo de Nómina Docente</h2>
+
+<div th:if="${error}" class="error" th:text="${error}"></div>
+
+<form th:action="@{/calcular}" th:object="${docente}" method="post">
+  <label>Nombre:</label>
+  <input type="text" th:field="*{nombre}" required>
+
+  <label>Identificación:</label>
+  <input type="text" th:field="*{identificacion}" required>
+
+  <label>Valor hora (10.000 - 80.000):</label>
+  <input type="number" th:field="*{valorHora}" required>
+
+  <label>Número de horas (máx. 76):</label>
+  <input type="number" th:field="*{horasTrabajadas}" required>
+
+  <button type="submit">Calcular Nómina</button>
+</form>
+</body>
+</html>

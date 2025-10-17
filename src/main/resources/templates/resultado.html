@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado Nómina</title>
+    <style>
+        body { font-family: Arial; background: #f8f9fa; padding: 30px; }
+        .card { background: white; width: 400px; margin: auto; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px #ccc; text-align:center; }
+        a { text-decoration: none; color: white; background-color: #007bff; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>Resultado de la Nómina</h2>
+    <p><b>Nombre:</b> <span th:text="${docente.nombre}"></span></p>
+    <p><b>Identificación:</b> <span th:text="${docente.identificacion}"></span></p>
+    <p><b>Horas Trabajadas:</b> <span th:text="${docente.horasTrabajadas}"></span></p>
+    <p><b>Valor Hora:</b> $<span th:text="${docente.valorHora}"></span></p>
+    <h3>Total Nómina: $<span th:text="${docente.totalNomina}"></span></h3>
+    <a th:href="@{/}">Volver</a>
+</div>
+</body>
+</html>
