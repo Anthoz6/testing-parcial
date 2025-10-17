@@ -1,6 +1,5 @@
 package parcial_desarrollo_software.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,7 @@ public class NominaController {
     @PostMapping("/calcular")
     public String calcularNomina(@ModelAttribute Docente docente, Model model) {
         try {
-            double total = nominaService.calcularNomina(docente.getValorHora(), docente.getHorasTrabajadas());
+            int total = nominaService.calcularNomina(docente.getValorHora(), docente.getHorasTrabajadas());
             docente.setTotalNomina(total);
             model.addAttribute("docente", docente);
             return "resultado";

@@ -18,7 +18,7 @@ class ApplicationTests {
 	// Pruebas unitarias para el servicio de nómina
 	@Test
 	void testCalculoCorrecto() {
-		double total = nominaService.calcularNomina(20000, 40);
+		int total = nominaService.calcularNomina(20000, 40);
 		assertEquals(800000, total);
 	}
 
@@ -46,19 +46,19 @@ class ApplicationTests {
 	// Pruebas de frontera (borde)
 	@Test
 	void testBordeInferiorValorHora() {
-		double total = nominaService.calcularNomina(10000, 10);
+		int total = nominaService.calcularNomina(10000, 10);
 		assertEquals(100000, total);
 	}
 
 	@Test
 	void testBordeSuperiorValorHora() {
-		double total = nominaService.calcularNomina(80000, 10);
+		int total = nominaService.calcularNomina(80000, 10);
 		assertEquals(800000, total);
 	}
 
 	@Test
 	void testBordeHorasMaximas() {
-		double total = nominaService.calcularNomina(20000, 76);
+		int total = nominaService.calcularNomina(20000, 76);
 		assertEquals(1520000, total);
 	}
 }

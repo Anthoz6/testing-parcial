@@ -3,9 +3,9 @@ package parcial_desarrollo_software.model;
 public class Docente {
     private String nombre;
     private String identificacion;
-    private double valorHora;
+    private int valorHora;
     private int horasTrabajadas;
-    private double totalNomina;
+    private int totalNomina;
 
     public String getNombre() {
         return nombre;
@@ -23,11 +23,11 @@ public class Docente {
         this.identificacion = identificacion;
     }
 
-    public double getValorHora() {
+    public int getValorHora() {
         return valorHora;
     }
 
-    public void setValorHora(double valorHora) {
+    public void setValorHora(int valorHora) {
         this.valorHora = valorHora;
     }
 
@@ -39,11 +39,11 @@ public class Docente {
         this.horasTrabajadas = horasTrabajadas;
     }
 
-    public double getTotalNomina() {
+    public int getTotalNomina() {
         return totalNomina;
     }
 
-    public void setTotalNomina(double totalNomina) {
+    public void setTotalNomina(int totalNomina) {
         this.totalNomina = totalNomina;
     }
 }
