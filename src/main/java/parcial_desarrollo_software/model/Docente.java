@@ -4,13 +4,14 @@ import jakarta.validation.constraints.*;
 
 public class Docente {
 
-    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotBlank(message = "El nombre no puede estar vacío.")
     @Pattern(
-            regexp = "^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$",
-            message = "El nombre solo puede contener letras y espacios, y no puede comenzar con un espacio."
+            regexp = "^(?!.*(\\b\\w{2,}\\b)(?:\\s+\\1\\b){1,})(?!.*([A-Za-zÁÉÍÓÚáéíóúÑñ])\\2{2,})[A-Za-zÁÉÍÓÚáéíóúÑñ]{2,}(?:\\s[A-Za-zÁÉÍÓÚáéíóúÑñ]{2,}){0,4}$",
+            message = "Ingrese un nombre válido: solo letras y espacios, sin repeticiones excesivas ni palabras repetidas."
     )
     @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres.")
     private String nombre;
+
 
     @Min(value = 10000, message = "La identificación debe tener al menos 5 dígitos.")
     @Max(value = 9999999999L, message = "La identificación no puede superar 10 dígitos.")
@@ -27,6 +28,8 @@ public class Docente {
     private Integer horasTrabajadas;
 
     private int totalNomina;
+
+    // Constructors, getters, and setters...
 
     public String getNombre() {
         return nombre;
