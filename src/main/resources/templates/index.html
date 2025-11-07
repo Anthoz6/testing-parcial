@@ -18,11 +18,14 @@
     <div class="form-group">
       <label for="nombre">Nombre completo</label>
       <input type="text" id="nombre" th:field="*{nombre}"
-             pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$"
-             title="Solo letras y espacios, no puede comenzar con un espacio"
-             required placeholder="Ej: Juan Pérez">
+             pattern="^(?!.*(\b\w{2,}\b)(?:\s+\1\b){1,})[A-Za-zÁÉÍÓÚáéíóúÑñ]{2,}(?:\s[A-Za-zÁÉÍÓÚáéíóúÑñ]{2,}){0,4}$"
+             title="Debe contener entre 1 y 5 palabras, solo letras y espacios. Cada palabra con al menos 2 letras."
+             maxlength="50"
+             required
+             placeholder="Ej: Juan Pérez">
       <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></div>
     </div>
+
 
     <div class="form-group">
       <label for="identificacion">Identificación</label>
@@ -37,12 +40,12 @@
       <label for="valorHora">Valor por hora</label>
       <input type="number" id="valorHora" th:field="*{valorHora}"
              required min="10000" max="80000" placeholder="Ej: 50000">
-      <span class="input-hint">Rango permitido: $10.000 - $80.000</span>
+      <span class="input-hint">Rango permitido: 10000 - 80000</span>
       <div th:if="${#fields.hasErrors('valorHora')}" th:errors="*{valorHora}" class="error"></div>
     </div>
 
     <div class="form-group">
-      <label for="horasTrabajadas">Horas trabajadas</label>
+      <label for="horasTrabajadas">Horas trabajadas al mes</label>
       <input type="number" id="horasTrabajadas" th:field="*{horasTrabajadas}"
              required min="1" max="76" placeholder="Ej: 40">
       <span class="input-hint">Máximo: 76 horas</span>
